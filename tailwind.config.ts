@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-geist-sans)", "Apple SD Gothic Neo", "Malgun Gothic", "sans-serif"],
+        sans: ["Pretendard Variable", "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", "sans-serif"],
       },
     },
   },

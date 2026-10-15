@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* 크림 → 연한 살구 */
+  --bg-from: #fffaf2;
+  --bg-via: #fdeee2;
+  --bg-to: #f9dccb;
+}
+
+.dark {
+  /* 같은 온도의 짙은 브라운 */
+  --bg-from: #1d1815;
+  --bg-via: #231b17;
+  --bg-to: #2c201a;
+}
+
 body {
-  @apply bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100;
+  @apply text-stone-800 dark:text-stone-100;
+  min-height: 100dvh;
+  background: linear-gradient(165deg, var(--bg-from) 0%, var(--bg-via) 50%, var(--bg-to) 100%) fixed;
+  -webkit-tap-highlight-color: transparent;
 }
