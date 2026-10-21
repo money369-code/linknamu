@@ -10,13 +10,22 @@ function recordClick(linkId: string) {
   fetch("/api/clicks", { method: "POST", body, keepalive: true }).catch(() => {});
 }
 
-export default function LinkCard({ link }: { link: LinkItem }) {
+type Props = {
+  link: LinkItem;
+  count: number;
+  onClick?: () => void;
+};
+
+export default function LinkCard({ link, count, onClick }: Props) {
   return (
     <a
       href={link.url}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() => recordClick(link.id)}
+      onClick={() => {
+        recordClick(link.id);
+        onClick?.();
+      }}
       className="relative block w-full rounded-2xl border border-white/70 bg-white/45 px-16 py-4 text-center shadow-[0_8px_24px_-12px_rgba(150,80,40,0.25)] backdrop-blur-xl transition duration-300 ease-out hover:-translate-y-px hover:bg-white/60 hover:shadow-[0_12px_28px_-12px_rgba(150,80,40,0.32)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300/70 active:translate-y-0 dark:border-white/10 dark:bg-white/[0.06] dark:shadow-[0_8px_24px_-12px_rgba(0,0,0,0.6)] dark:hover:bg-white/[0.09]"
     >
       {/* 제목이 카드 가운데에 오도록 아이콘은 왼쪽에 띄워 배치 */}
@@ -25,6 +34,12 @@ export default function LinkCard({ link }: { link: LinkItem }) {
           <LinkIcon name={link.icon} className="h-6 w-6" />
         </span>
       )}
+      <span
+        aria-label={`클릭 ${count}회`}
+        className="absolute right-4 top-1/2 -translate-y-1/2 text-xs tabular-nums text-stone-400 dark:text-stone-500"
+      >
+        {count.toLocaleString("ko-KR")}회
+      </span>
       <span className="block text-[15px] font-semibold tracking-tight text-stone-900 dark:text-stone-50">
         {link.title}
       </span>
